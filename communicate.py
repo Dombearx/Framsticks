@@ -17,9 +17,9 @@ p = Popen(command, stdout=PIPE, stderr=PIPE, stdin=PIPE, shell=True)
 
 # the server process ends...
 (stdoutdata, stderrdata) = p.communicate(bytes(rnd, "UTF-8"))
-stdoutdata = stdoutdata.decode()  # bytes to str
-stderrdata = stderrdata.decode()  # bytes to str
+# stdoutdata = stdoutdata.decode()  # bytes to str
+# stderrdata = stderrdata.decode()  # bytes to str
 
 print(stdoutdata)
 
-(stdoutdata, stderrdata) = p.communicate(bytes(simple, "UTF-8"))
+#(stdoutdata, stderrdata) = p.communicate(bytes(simple, "UTF-8"))
