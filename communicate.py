@@ -12,6 +12,11 @@ def prepareConsole():
     p.stdin.write(bytes(rnd, "UTF-8"))
     p.stdin.flush()
 
+    # expdef
+    expdef = "expdef standard-eval" + "\n"
+    p.stdin.write(bytes(expdef, "UTF-8"))
+    p.stdin.flush()
+
 
 def getSimpleGenotype(outputFileName):
     simple = "getsimplest 1 " + outputFileName + "\n"
@@ -24,7 +29,21 @@ def getSimpleGenotype(outputFileName):
         print("reading :", p.stdout.readline())
 
 
-"expdef standard-eval" "eval eval-allcriteria.sim plik_z_genotypem.gen" - q
+def framsEvaluate(inputFileName):
+    eval = "eval " + inputFileName + " eval-allcriteria.sim" + "\n"
+
+    p.stdin.write(bytes(eval, "UTF-8"))
+    p.stdin.flush()
+
+    maxLines = 50
+    for index in range(0, maxLines):
+        print("reading")
+        #print("reading :", p.stderr.readline())
+        line = p.stdout.readline()
+        print("reading :", index, line)
+        if("FileObject.write" in line.decode()):
+            print("Ending...")
+            break
 
 
 def mutate(inputFileName, outputFileName):
@@ -68,6 +87,8 @@ getSimpleGenotype("abc")
 mutate("abc", "def")
 
 framsCrossover("abc", "def", "krzyzowka")
+
+framsEvaluate("toEvaluate.gen")
 
 p.stdin.close()
 p.terminate()
