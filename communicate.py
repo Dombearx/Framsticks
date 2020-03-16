@@ -23,10 +23,8 @@ def getSimpleGenotype(outputFileName):
     p.stdin.write(bytes(simple, "UTF-8"))
     p.stdin.flush()
 
-    maxLines = 1
-    for _ in range(0, maxLines):
-        #print("reading :", p.stderr.readline())
-        print("reading :", p.stdout.readline())
+    while("FileObject.write" not in p.stdout.readline().decode()):
+        pass
 
 
 def framsEvaluate(inputFileName):
@@ -35,15 +33,8 @@ def framsEvaluate(inputFileName):
     p.stdin.write(bytes(eval, "UTF-8"))
     p.stdin.flush()
 
-    maxLines = 50
-    for index in range(0, maxLines):
-        print("reading")
-        #print("reading :", p.stderr.readline())
-        line = p.stdout.readline()
-        print("reading :", index, line)
-        if("FileObject.write" in line.decode()):
-            print("Ending...")
-            break
+    while("FileObject.write" not in p.stdout.readline().decode()):
+        pass
 
 
 def mutate(inputFileName, outputFileName):
@@ -51,10 +42,8 @@ def mutate(inputFileName, outputFileName):
     p.stdin.write(bytes(mutation, "UTF-8"))
     p.stdin.flush()
 
-    maxLines = 1
-    for _ in range(0, maxLines):
-        #print("reading :", p.stderr.readline())
-        print("reading :", p.stdout.readline())
+    while("FileObject.write" not in p.stdout.readline().decode()):
+        pass
 
 
 def framsCrossover(inputFileName1, inputFileName2, outputFileName):
@@ -65,9 +54,8 @@ def framsCrossover(inputFileName1, inputFileName2, outputFileName):
     p.stdin.write(bytes(crossover, "UTF-8"))
     p.stdin.flush()
 
-    maxLines = 1
-    for _ in range(0, maxLines):
-        print("reading :", p.stdout.readline())
+    while("FileObject.write" not in p.stdout.readline().decode()):
+        pass
 
 
 framsPath = r"E:\\Polibuda\\mag sem1\\Framsy\\Framsticks\\"
