@@ -114,7 +114,7 @@ class FramsticksCLI():
             genotype {String} 
 
         Returns:
-            String 
+            String -- genotype
         """
         inputFilePath = self.__saveToFile(genotype, "toMutate.gen")
         outputFilePath = "mutant.gen"
@@ -142,7 +142,7 @@ class FramsticksCLI():
             genotype2 {String}
 
         Returns:
-            String
+            String -- genotype
         """
         parent1FilePath = self.__saveToFile(genotype1, "parent1.gen")
         parent2FilePath = self.__saveToFile(genotype2, "parent2.gen")
@@ -177,7 +177,6 @@ if __name__ == "__main__":
     genotype = framsCLI.getSimpleGenotype()
     print(genotype)
 
-    # print(framsCLI.evaluate(genotype))
     parent1 = framsCLI.mutate(genotype)
     parent2 = framsCLI.mutate(parent1)
     print("Parent1: ", parent1)
