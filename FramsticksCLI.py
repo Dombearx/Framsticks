@@ -1,4 +1,5 @@
 from subprocess import Popen, PIPE
+import json
 
 
 class FramsticksCLI():
@@ -29,13 +30,26 @@ class FramsticksCLI():
         self.framsProcess.stdin.write(bytes(expdefCommand, "UTF-8"))
         self.framsProcess.stdin.flush()
 
-    def getSimpleGenotype(self, outputFileName):
+    def getSimpleGenotype(self):
+        outputFileName = "simplest.gen"
         getSimpleCommand = "getsimplest 1 " + outputFileName + "\n"
         self.framsProcess.stdin.write(bytes(getSimpleCommand, "UTF-8"))
         self.framsProcess.stdin.flush()
 
         while("FileObject.write" not in self.framsProcess.stdout.readline().decode()):
             pass
+
+        with open(self.framsPath + "\\data\\scripts_output\\" + outputFileName) as f:
+            return "".join(f.readlines())
+
+        '''
+        with open(self.framsPath + "\\data\\scripts_output\\" + outputFileName) as f:
+            data = json.load(f)
+        dictionary = data[0]
+        results_temp = dictionary["evaluations"]
+        results = results_temp[""]
+        return results
+        '''
 
     def evaluate(self, inputFilePath):
         evalCommand = "eval " + inputFilePath + " eval-allcriteria.sim" + "\n"
@@ -73,4 +87,6 @@ if __name__ == "__main__":
 
     framsCLI = FramsticksCLI(framsPath)
 
-    framsCLI.getSimpleGenotype("test")
+    genotype = framsCLI.getSimpleGenotype()
+    print(genotype)
+    print(len(genotype))
