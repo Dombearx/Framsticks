@@ -88,7 +88,7 @@ class FramsticksCLI():
         """
         filePath = self.__saveGenotypeToFile(genotype, "toEvaluate.gen")
 
-        evalCommand = "eval eval-allcriteria.sim " + filePath + "\n"
+        evalCommand = "evaluate eval-allcriteria.sim " + filePath + "\n"
 
         self.framsProcess.stdin.write(bytes(evalCommand, "UTF-8"))
         self.framsProcess.stdin.flush()
@@ -119,7 +119,7 @@ class FramsticksCLI():
         inputFilePath = self.__saveToFile(genotype, "toMutate.gen")
         outputFilePath = "mutant.gen"
 
-        mutationCommand = "mut " + inputFilePath + " " + outputFilePath + "\n"
+        mutationCommand = "mutate " + inputFilePath + " " + outputFilePath + "\n"
         self.framsProcess.stdin.write(bytes(mutationCommand, "UTF-8"))
         self.framsProcess.stdin.flush()
 
